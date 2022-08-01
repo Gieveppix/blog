@@ -4,21 +4,23 @@
         <h3>{{ post.title }}</h3>
         <p class="pre">{{ post.body }}</p>
     </div>
-    <p v-else>Loading...</p>
+    <p v-else>
+        <Spinner />
+    </p>
 </template>
 
 <script>
 import getPost from '../composables/getPost.js'
+import Spinner from '@/components/Spinner.vue'
 
 export default {
-    props: ['id'],
+    props: ["id"],
+    components: { Spinner },
     setup(props) {
-        const { post, error, load} = getPost(props.id)
-        
-        load()
-
-        return { post, error}
-    }
+        const { post, error, load } = getPost(props.id);
+        load();
+        return { post, error };
+    },
 }
 </script>
 
