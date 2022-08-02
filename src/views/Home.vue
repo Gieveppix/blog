@@ -1,14 +1,13 @@
 <template>
   <div class="home">
-    <h1>Home</h1>
+    <h1 class="homeTitle">Blog</h1>
     <div v-if="error">{{ error }}</div>
-    <div v-if="posts.length">
-    <PostList :posts="posts" />
-    </div>
-    <div v-else>
-      <Spinner />
-    </div>
-
+      <div v-if="posts.length">
+        <PostList :posts="posts" />
+      </div>
+      <div v-else>
+        <Spinner />
+      </div>
   </div>
 </template>
 
@@ -29,3 +28,16 @@ export default {
     }
 }
 </script>
+
+<style>
+.home {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
+}
+.homeTitle {
+  padding: 20px;
+  text-align: center;
+}
+
+</style>
