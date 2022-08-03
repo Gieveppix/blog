@@ -15,7 +15,7 @@
                 #{{ tag }}
             </span>
         </div> -->
-        <div class="tag" v-for="tag in tags" :key="tag">
+        <div class="tag" v-for="tag in post.tags" :key="tag">
             <span>
                 <router-link :to="{ name: 'Tag', params: {tag: tag}}">
                     <div class="hover-link">#{{tag}}</div>
