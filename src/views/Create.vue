@@ -92,7 +92,7 @@ label::before {
     display: block;
     width: 100%;
     height: 100%;
-    background: #ffb561;
+    background: rgb(67, 67, 67);
     position: absolute;
     z-index: -1; /* goes behind label */
     padding-right: 40px;
@@ -102,7 +102,7 @@ label::before {
 button {
     display: block;
     margin-top: 30px;
-    background: #ff8800;
+    background: rgb(20, 20, 20);
     color: white;
     border: none;
     padding: 8px 16px;
@@ -111,10 +111,11 @@ button {
 .pill {
     display: inline-block;
     margin: 10px 10px 0 0;
-    color: #444;
-    background: #ddd;
-    padding: 8px;
-    border-radius: 20px;
-    font-size: 14px;
+    color: #7057dc;
+    font-weight: 500;
+    letter-spacing: .01875rem;
+    background-color: #f1eefc;
+    padding: 0.5625rem 0.5rem;
+    
 }
 </style>

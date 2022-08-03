@@ -1,32 +1,43 @@
 <template>
   <div class="post">
-    <div class="img-hover-zoom">
+    <div>
         <router-link :to="{ name: 'Details', params: {id: post.id}}">
+        <div class="img-hover-zoom">
             <img class="pic" src="../assets/freeStock/img3.jpeg">
+        </div>
             <h3>{{ post.title }}</h3>  
         </router-link>
+    </div>
         
         <p>{{ snippet }}</p>
-        <div class="tag">
-            <span v-for="tag in post.tags" :key="tag">
+        <!-- <div class="tag">
+            <span  v-for="tag in post.tags" :key="tag">
                 #{{ tag }}
             </span>
+        </div> -->
+        <div class="tag" v-for="tag in tags" :key="tag">
+            <span>
+                <router-link :to="{ name: 'Tag', params: {tag: tag}}">
+                    <div class="hover-link">#{{tag}}</div>
+                </router-link>
+            </span>
         </div>
-    </div>
     </div>
 
 </template>
 
 <script>
 import { computed } from 'vue'
+import useTags from '../composables/useTags'
 
 export default {
-    props: ['post'],
+    props: ['post', 'posts'],
     setup(props) {
+        const { tags } = useTags(props.posts)
         const snippet = computed(() => {
             return props.post.body.substring(0, 272) + '...'
         })
-        return { snippet }
+        return { snippet, tags }
     }
 }
 </script>
@@ -50,7 +61,7 @@ export default {
     display: block;
     width: 100%;
     height: 100%;
-    background: #ff8800;
+    background: rgb(67, 67, 67);
     position: absolute;
     z-index: -1;
     padding-right: 46px;
@@ -64,9 +75,21 @@ export default {
     padding-top: 26px;
 }
 .tag {
-    padding-left: 230px;
+    display: inline-block;
+    font-weight: 500;
+    letter-spacing: .01875rem;
+    background-color: #f1eefc;
+    padding: 0.5625rem 0.5rem;
+    margin-right: 1rem;
 }
-.img-hower-zoom {
+.tag a:hover { 
+    text-decoration: none;
+}
+a {
+    text-decoration: none;
+    color: #7057dc;
+}
+.img-hover-zoom {
     float: left;
     height: 240px;
     overflow: hidden;
@@ -77,4 +100,5 @@ export default {
 .img-hover-zoom:hover  {
   transform: scale(1.02);
 }
+
 </style>

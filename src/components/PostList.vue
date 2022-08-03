@@ -1,7 +1,7 @@
 <template>
   <div class="post-list">
     <div v-for="post in posts" :key="post.id">
-        <SinglePost :post="post" />
+        <SinglePost :posts="posts" :post="post" />
     </div>
   </div>
 </template>
@@ -17,6 +17,7 @@ export default {
         onMounted(() => console.log('components mounted'))
         onUnmounted(() => console.log('components unmounted'))
         onUpdated(() => console.log('component updated'))
+        return props.posts
     },
 }
 </script>

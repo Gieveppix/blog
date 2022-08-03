@@ -36,7 +36,7 @@ export default {
         })
         const titleTag = route.params.tag
 
-        return { matchingTag, posts, error, titleTag }
+        return { matchingTag, titleTag, posts, error }
     }
 
 }

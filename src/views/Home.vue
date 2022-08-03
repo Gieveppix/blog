@@ -1,9 +1,9 @@
 <template>
   <div class="home">
-    <h1 class="homeTitle">Home</h1>
     <div v-if="error">{{ error }}</div>
       <div v-if="posts.length">
         <PostList :posts="posts" />
+        <TagCloud :posts="posts"/>
       </div>
       <div v-else>
         <Spinner />
@@ -15,10 +15,11 @@
 import PostList from '../components/PostList.vue'
 import getPosts from '../composables/getPosts'
 import Spinner from '@/components/Spinner.vue'
+import TagCloud from '@/components/TagCloud.vue'
 
 export default {
     name: "Home",
-    components: { PostList, Spinner },
+    components: { PostList, Spinner, TagCloud },
     setup() {
         const { posts, error, load} = getPosts()
 
@@ -30,9 +31,9 @@ export default {
 
 <style>
 .home {
+  color: rgb(67, 67, 67);
   max-width: 1200px;
   margin: 0 auto;
-  padding: 10px;
 }
 .homeTitle {
   padding: 20px;

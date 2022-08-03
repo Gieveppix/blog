@@ -37,7 +37,7 @@ export default {
     margin: 0 auto;
 }
 .post p {
-    color: #444;
+    color: rgb(67, 67, 67);
     line-height: 1.5em;
     margin-top: 40px;
 }
