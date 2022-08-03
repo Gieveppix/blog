@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1 class="homeTitle">Blog</h1>
+    <h1 class="homeTitle">Home</h1>
     <div v-if="error">{{ error }}</div>
       <div v-if="posts.length">
         <PostList :posts="posts" />
@@ -38,7 +38,6 @@ export default {
 }
 .homeTitle {
   padding: 20px;
-  text-align: center;
 }
 
 </style>
