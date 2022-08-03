@@ -53,7 +53,7 @@ export default {
     background: #ff8800;
     position: absolute;
     z-index: -1;
-    padding-right: 40px;
+    padding-right: 46px;
     left: -30px;
 }
 .pic {
@@ -75,6 +75,6 @@ export default {
   transition: transform .35s ease;
 }
 .img-hover-zoom:hover  {
-  transform: scale(1.1);
+  transform: scale(1.02);
 }
 </style>

@@ -8,7 +8,7 @@
       <div v-else>
         <Spinner />
       </div>
-  </div>
+    </div>
 </template>
 
 <script>
@@ -16,7 +16,6 @@ import PostList from '../components/PostList.vue'
 import getPosts from '../composables/getPosts'
 import Spinner from '@/components/Spinner.vue'
 
-//b4 firebase
 export default {
     name: "Home",
     components: { PostList, Spinner },
@@ -24,7 +23,6 @@ export default {
         const { posts, error, load} = getPosts()
 
         load()
-
         return { posts, error };
     }
 }
