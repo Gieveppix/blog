@@ -28,6 +28,12 @@
         "dogs"
       ],
       "id": 3
+    },
+    {
+      "title": "Testing the router",
+      "body": "Working!?",
+      "tags": [],
+      "id": 4
     }
   ]
 }
