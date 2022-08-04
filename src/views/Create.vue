@@ -29,6 +29,14 @@ export default {
         const body = ref('')
         const tag = ref('')
         const tags = ref([])
+        const dateTime = ref('')
+
+    
+        const current = new Date();
+        const dateT = current.getDate() +'/'+ (current.getMonth()+1) +'/'+ current.getFullYear();
+        const dateTim = dateT;
+
+        console.log(dateTim)
 
         const router = useRouter()
         console.log(router)
@@ -45,7 +53,8 @@ export default {
             const post = {
                 title: title.value,
                 body: body.value,
-                tags: tags.value
+                tags: tags.value,
+                dateTime: dateTim
             }
 
             await fetch('http://localhost:3000/posts', {
@@ -57,7 +66,7 @@ export default {
             router.push({ name: 'Home' })
         }
 
-        return { title, body, tag, tags, handleKeydown, addPost }
+        return { title, body, tag, tags, dateTime, handleKeydown, addPost }
     }
 }
 </script>
@@ -116,6 +125,6 @@ button {
     letter-spacing: .01875rem;
     background-color: #f1eefc;
     padding: 0.5625rem 0.5rem;
-    
+    margin-right: 1rem;
 }
 </style>

@@ -9,12 +9,7 @@
         </router-link>
     </div>
         
-        <p>{{ snippet }}</p>
-        <!-- <div class="tag">
-            <span  v-for="tag in post.tags" :key="tag">
-                #{{ tag }}
-            </span>
-        </div> -->
+        <p class="snipp">{{ snippet }}</p>
         <div class="tag" v-for="tag in post.tags" :key="tag">
             <span>
                 <router-link :to="{ name: 'Tag', params: {tag: tag}}">
@@ -22,6 +17,7 @@
                 </router-link>
             </span>
         </div>
+        <div class="date">Posted: {{post.dateTime}}</div>
     </div>
 
 </template>
@@ -35,7 +31,7 @@ export default {
     setup(props) {
         const { tags } = useTags(props.posts)
         const snippet = computed(() => {
-            return props.post.body.substring(0, 272) + '...'
+            return props.post.body.substring(0, 315) + '...'
         })
         return { snippet, tags }
     }
@@ -64,8 +60,8 @@ export default {
     background: rgb(67, 67, 67);
     position: absolute;
     z-index: -1;
-    padding-right: 46px;
-    left: -30px;
+    padding-right: 45px;
+    left: -35px;
 }
 .pic {
     height: 240px;
@@ -82,23 +78,26 @@ export default {
     padding: 0.5625rem 0.5rem;
     margin-right: 1rem;
 }
-.tag a:hover { 
-    text-decoration: none;
-}
-a {
-    text-decoration: none;
-    color: #7057dc;
-}
 .img-hover-zoom {
     float: left;
+    display: block;
     height: 240px;
-    overflow: hidden;
 }
 .img-hover-zoom {
   transition: transform .35s ease;
+  overflow: hidden;
 }
 .img-hover-zoom:hover  {
   transform: scale(1.02);
+}
+.snipp {
+    font-size: large;
+}
+.date {
+    float: right;
+    margin-right: 20rem;
+    margin-top: 0.5625rem;
+    font-weight: 500;
 }
 
 </style>

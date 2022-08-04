@@ -1,6 +1,6 @@
 <template>
   <header>
-    <h1>The New and Improved Barrage Blog</h1>
+    <router-link :to="{ name: 'Home' }"><h1>The New and Improved Barrage Blog</h1></router-link>
     <nav>
         <router-link :to="{ name: 'Home' }">Home</router-link>
         <router-link :to="{ name: 'Create' }">Create Post</router-link>
@@ -24,8 +24,13 @@ header {
     padding: 10px;
 }
 header h1 {
-    color: rgb(95, 95, 95);
+    color: rgb(67, 67, 67);
     font-size: 48px;
+}
+header h1:hover {
+    -webkit-transition: color 0.33s;
+    transition: color 0.33s;
+    color: #7057dc;
 }
 header a {
     color: #bbb;
