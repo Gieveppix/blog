@@ -3,7 +3,7 @@
     <div>
         <router-link :to="{ name: 'Details', params: {id: post.id}}">
         <div class="img-hover-zoom">
-            <img class="pic" src="../assets/freeStock/img3.jpeg">
+            <nav class="pic"></nav>
         </div>
             <h3>{{ post.title }}</h3>  
         </router-link>
@@ -32,13 +32,21 @@ export default {
         const { tags } = useTags(props.posts)
         const snippet = computed(() => {
             return props.post.body.substring(0, 315) + '...'
+        
         })
-        return { snippet, tags }
+        let picture = "../assets/freeStock/img5.jpeg"
+        return { snippet, tags, picture }
     }
 }
 </script>
 
 <style>
+nav.pic {
+    background-image: url("/Users/mmilanovic/Documents/vue/Blog/vueblog/src/assets/freeStock/img1.jpeg");
+    background-repeat: no-repeat;
+    background-size: 235px 225px;
+    margin-top: 26px;
+}
 .post {
     margin: 0 0px 30px;
     padding-bottom: 60px;

@@ -9,6 +9,7 @@
         "coding",
         "news"
       ],
+      "img": "../assets/freeStock/img3.229ed3be.jpeg",
       "dateTime": "01/01/2000"
     },
     {
@@ -20,6 +21,7 @@
         "webdev",
         "coding"
       ],
+      "img": "/Users/mmilanovic/Documents/vue/Blog/vueblog/src/assets/freeStock/img1.jpeg",
       "dateTime": "01/01/2000"
     },
     {
@@ -39,6 +41,7 @@
         "news",
         "dogs"
       ],
+      "img": "/Users/mmilanovic/Documents/vue/Blog/vueblog/src/assets/freeStock/img1.jpeg",
       "id": 3,
       "dateTime": "01/01/2000"
     },
@@ -55,6 +58,7 @@
         "nonsense"
       ],
       "id": 4,
+      "img": "/Users/mmilanovic/Documents/vue/Blog/vueblog/src/assets/freeStock/img1.jpeg",
       "dateTime": "01/01/2000"
     },
     {
@@ -67,6 +71,7 @@
         "back"
       ],
       "id": 5,
+      "img": "/Users/mmilanovic/Documents/vue/Blog/vueblog/src/assets/freeStock/img1.jpeg",
       "dateTime": "01/01/2000"
     }
   ]

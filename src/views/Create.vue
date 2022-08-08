@@ -18,12 +18,9 @@
     </form>
   </div>
 </template>
-
 <script>
 import { ref } from '@vue/reactivity'
 import { useRouter } from 'vue-router'
-import { projectFirestore } from "@/firebase/config";
-
 export default {
     setup() {
         const title = ref('')
@@ -31,17 +28,13 @@ export default {
         const tag = ref('')
         const tags = ref([])
         const dateTime = ref('')
-
     
         const current = new Date();
         const dateT = current.getDate() +'/'+ (current.getMonth()+1) +'/'+ current.getFullYear();
         const dateTim = dateT;
-
         console.log(dateTim)
-
         const router = useRouter()
         console.log(router)
-
         const handleKeydown = () => {
             if (!tags.value.includes(tag.value)) {
                 tag.value = tag.value.replace(/\s/, '') //removes whitspace
@@ -49,7 +42,6 @@ export default {
             }
             tag.value = ''
         }
-
         const addPost = async () => {
             const post = {
                 title: title.value,
@@ -57,18 +49,17 @@ export default {
                 tags: tags.value,
                 dateTime: dateTim
             }
-
-            const res = await projectFirestore.collection('posts').add(post)
-            console.log(res)
-
+            await fetch('http://localhost:3000/posts', {
+                method: 'POST',
+                headers: { 'Content-type': 'application/json'},
+                body: JSON.stringify(post)
+            })
             router.push({ name: 'Home' })
         }
-
         return { title, body, tag, tags, dateTime, handleKeydown, addPost }
     }
 }
 </script>
-
 <style>
 form {
     max-width: 480px;
