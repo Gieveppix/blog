@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import deletePost from "../composables/deletePost.js";
 import getPost from "../composables/getPost.js";
 import Spinner from "@/components/Spinner.vue";
 import { useRouter } from "vue-router";
@@ -19,37 +20,11 @@ export default {
   props: ["id"],
   components: { Spinner },
   setup(props) {
-   
-   //const route = useRoute();
-    
-    const router = useRouter();
-    
-    // console.log(route)
-    // console.log(props)
-    
     const { post, error, load } = getPost(props.id); //same as getPost(route.params.id)
     load();
 
-    const handleDelete = async () => {
-      try {
-        let data = await fetch(
-          "http://localhost:3000/posts/" + props.id
-        );
-        if (!data.ok) {
-          throw Error("that post does not exist");
-        }
-        post.value = await data.json();
-      } catch (err) {
-        error.value = err.message;
-        console.log(error.value);
-      }
-      await fetch("http://localhost:3000/post/" + props.id, {
-        method: "DELETE",
-        headers: { "Content-type": "application/json" },
-      });
-      console.log("DELETING post: " + props.id);
-      router.push({ name: "Home" });
-    };
+    const router = useRouter();
+    const { handleDelete } = deletePost(props.id, router);
 
     return { post, error, handleDelete };
   },
@@ -73,6 +48,6 @@ export default {
   white-space: pre-wrap;
 }
 button.delete {
-    margin: auto;
+  margin: auto;
 }
 </style>

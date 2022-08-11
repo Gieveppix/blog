@@ -1,13 +1,9 @@
 <template>
-  <div class="spin">
-
-  </div>
+  <div class="spin"></div>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style>
@@ -22,6 +18,8 @@ export default {
   animation: spin 1s ease infinite;
 }
 @keyframes spin {
-  to { -webkit-transform: rotateZ(360deg);  }
+  to {
+    -webkit-transform: rotateZ(360deg);
+  }
 }
 </style>

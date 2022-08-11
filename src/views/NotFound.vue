@@ -3,8 +3,8 @@
     <h1 class="status">404</h1>
   </div>
   <div class="notfound">
-   <h2>Page Not Found!</h2>
-   </div>
+    <h2>Page Not Found!</h2>
+  </div>
 </template>
 
 <script>
@@ -19,6 +19,6 @@ export default {};
   color: #7057dc;
 }
 .status {
-    padding-top: 7rem;
+  padding-top: 7rem;
 }
 </style>

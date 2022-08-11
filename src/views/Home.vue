@@ -1,32 +1,34 @@
 <template>
-  <div class="home">
-    <div v-if="error">{{ error }}</div>
+  <div style="margin-top: 192px">
+    <div class="home">
+      <div v-if="error">{{ error }}</div>
       <div v-if="posts.length">
         <PostList :posts="posts" />
-        <TagCloud :posts="posts"/>
+        <TagCloud :posts="posts" />
       </div>
       <div v-else>
         <Spinner />
       </div>
     </div>
+  </div>
 </template>
 
 <script>
-import PostList from '../components/PostList.vue'
-import getPosts from '../composables/getPosts'
-import Spinner from '@/components/Spinner.vue'
-import TagCloud from '@/components/TagCloud.vue'
+import PostList from "../components/PostList.vue";
+import getPosts from "../composables/getPosts";
+import Spinner from "@/components/Spinner.vue";
+import TagCloud from "@/components/TagCloud.vue";
 
 export default {
-    name: "Home",
-    components: { PostList, Spinner, TagCloud },
-    setup() {
-        const { posts, error, load} = getPosts()
+  name: "Home",
+  components: { PostList, Spinner, TagCloud },
+  setup() {
+    const { posts, error, load } = getPosts();
 
-        load()
-        return { posts, error };
-    }
-}
+    load();
+    return { posts, error };
+  },
+};
 </script>
 
 <style>
@@ -38,5 +40,4 @@ export default {
 .homeTitle {
   padding: 20px;
 }
-
 </style>
