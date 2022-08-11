@@ -1,17 +1,23 @@
 <template>
-  <div class="create">
-    <form @submit.prevent="addPost">
-      <label>Title:</label>
-      <input v-model="title" type="text" required />
-      <label>Content:</label>
-      <textarea v-model="body" required></textarea>
-      <label>Image link:</label>
-      <input v-model="img" type="text" required />
-      <label>Tags (press enter to add a tag)</label>
-      <input v-model="tag" type="text" @keydown.enter.prevent="handleKeydown" />
-      <div v-for="tag in tags" :key="tag" class="pill">#{{ tag }}</div>
-      <button>Add Post</button>
-    </form>
+  <div class="top">
+    <div class="create">
+      <form @submit.prevent="addPost">
+        <label>Title:</label>
+        <input v-model="title" type="text" required />
+        <label>Content:</label>
+        <textarea v-model="body" required></textarea>
+        <label>Image link:</label>
+        <input v-model="img" type="text" required />
+        <label>Tags (press enter to add a tag)</label>
+        <input
+          v-model="tag"
+          type="text"
+          @keydown.enter.prevent="handleKeydown"
+        />
+        <div v-for="tag in tags" :key="tag" class="pill">#{{ tag }}</div>
+        <button>Add Post</button>
+      </form>
+    </div>
   </div>
 </template>
 <script>
@@ -26,7 +32,7 @@ export default {
     const img = ref("");
 
     const router = useRouter();
-    console.log(router);
+    // console.log(router);
     const handleKeydown = () => {
       if (!tags.value.includes(tag.value)) {
         if (tag.value) {
@@ -44,7 +50,7 @@ export default {
         tags: tags.value,
         img: img.value,
       };
-      console.log("tagovi" + " " + tags.value);
+      // console.log("tagovi" + " " + tags.value);
       await fetch("http://localhost:3000/create", {
         method: "POST",
         headers: { "Content-type": "application/json" },

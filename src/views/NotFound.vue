@@ -1,9 +1,11 @@
 <template>
-  <div class="notfound">
-    <h1 class="status">404</h1>
-  </div>
-  <div class="notfound">
-    <h2>Page Not Found!</h2>
+  <div class="top">
+    <div class="notfound">
+      <h1 class="status">404</h1>
+    </div>
+    <div class="notfound">
+      <h2>Page Not Found!</h2>
+    </div>
   </div>
 </template>
 

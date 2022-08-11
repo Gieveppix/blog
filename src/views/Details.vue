@@ -1,13 +1,15 @@
 <template>
-  <div v-if="error">{{ error }}</div>
-  <div v-if="post" class="post">
-    <h3>{{ post.title }}</h3>
-    <p class="pre">{{ post.body }}</p>
-    <button class="delete" @click="handleDelete">DELETE POST</button>
+  <div class="top">
+    <div v-if="error">{{ error }}</div>
+    <div v-if="post" class="post">
+      <h3>{{ post.title }}</h3>
+      <p class="pre">{{ post.body }}</p>
+      <button class="delete" @click="handleDelete">DELETE POST</button>
+    </div>
+    <p v-else>
+      <Spinner />
+    </p>
   </div>
-  <p v-else>
-    <Spinner />
-  </p>
 </template>
 
 <script>

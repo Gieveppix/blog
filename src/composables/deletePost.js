@@ -18,7 +18,6 @@ const deletePost = (id, router) => {
       method: "DELETE",
       headers: { "Content-type": "application/json" },
     });
-    console.log("DELETING post: " + id);
     router.push({ name: "Home" });
   }
   return { handleDelete };

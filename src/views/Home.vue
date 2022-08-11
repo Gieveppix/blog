@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-top: 192px">
+  <div class="top">
     <div class="home">
       <div v-if="error">{{ error }}</div>
       <div v-if="posts.length">
@@ -32,6 +32,9 @@ export default {
 </script>
 
 <style>
+.top {
+  margin-top: 192px;
+}
 .home {
   color: rgb(67, 67, 67);
   max-width: 1300px;

@@ -2,7 +2,8 @@
   <div class="background">
     <header>
       <router-link :to="{ name: 'Home' }"
-        ><h1>The New and Improved Barrage Blog</h1></router-link>
+        ><h1>The New and Improved Barrage Blog</h1></router-link
+      >
       <nav>
         <router-link :to="{ name: 'Home' }">Home</router-link>
         <router-link :to="{ name: 'Create' }">Create Post</router-link>
