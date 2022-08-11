@@ -3,7 +3,9 @@ import Home from '../views/Home.vue'
 import Details from '../views/Details.vue'
 import Create from '../views/Create.vue'
 import Tag from '../views/Tag.vue'
-import SignIn from '../views/SignIn.vue'
+import Register from '../views/Register.vue'
+import LogIn from '../views/LogIn.vue'
+import NotFound from '../views/NotFound.vue'
 
 const routes = [
   {
@@ -28,9 +30,20 @@ const routes = [
     component: Tag
   },
   {
-    path: '/signin',
-    name: 'SignIn',
-    component: SignIn
+    path: '/register',
+    name: 'Register',
+    component: Register
+  },
+  {
+    path: '/login',
+    name: 'LogIn',
+    component: LogIn
+  },
+  {
+    //catchall 404
+    path: '/:catchAll(.*)',
+    name: 'NotFound',
+    component: NotFound
   }
 
 ]

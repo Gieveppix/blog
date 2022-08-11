@@ -3,12 +3,12 @@
     <div>
         <router-link :to="{ name: 'Details', params: {id: post.id}}">
         <div class="img-hover-zoom">
-            <nav class="pic"></nav>
+            <img class="pic" :src="post.img">
         </div>
             <h3>{{ post.title }}</h3>  
         </router-link>
     </div>
-        
+
         <p class="snipp">{{ snippet }}</p>
         <div class="tag" v-for="tag in post.tags" :key="tag">
             <span>
@@ -17,36 +17,27 @@
                 </router-link>
             </span>
         </div>
-        <div class="date">Posted: {{post.dateTime}}</div>
+        <div class="date">Posted: {{post.post_date}}</div>
     </div>
 
 </template>
-
 <script>
 import { computed } from 'vue'
 import useTags from '../composables/useTags'
-
 export default {
+    
     props: ['post', 'posts'],
     setup(props) {
+
         const { tags } = useTags(props.posts)
         const snippet = computed(() => {
             return props.post.body.substring(0, 315) + '...'
-        
         })
-        let picture = "../assets/freeStock/img5.jpeg"
-        return { snippet, tags, picture }
+        return { snippet, tags }
     }
 }
 </script>
-
 <style>
-nav.pic {
-    background-image: url("/Users/mmilanovic/Documents/vue/Blog/vueblog/src/assets/freeStock/img1.jpeg");
-    background-repeat: no-repeat;
-    background-size: 235px 225px;
-    margin-top: 26px;
-}
 .post {
     margin: 0 0px 30px;
     padding-bottom: 60px;
@@ -107,5 +98,4 @@ nav.pic {
     margin-top: 0.5625rem;
     font-weight: 500;
 }
-
 </style>

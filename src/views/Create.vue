@@ -5,6 +5,8 @@
         <input v-model="title" type="text" required>
         <label>Content:</label>
         <textarea v-model="body" required></textarea>
+        <label>Image link:</label>
+        <input v-model="img" type="text" required>
         <label>Tags (press enter to add a tag)</label>
         <input 
         v-model="tag" 
@@ -28,35 +30,41 @@ export default {
         const tag = ref('')
         const tags = ref([])
         const dateTime = ref('')
+        const img = ref('')
     
-        const current = new Date();
-        const dateT = current.getDate() +'/'+ (current.getMonth()+1) +'/'+ current.getFullYear();
-        const dateTim = dateT;
-        console.log(dateTim)
+        // const current = new Date();
+        // const dateT = current.getDate() +'/'+ (current.getMonth() + 1) + '/' + current.getFullYear();
+        // const dateTim = dateT;
+
         const router = useRouter()
         console.log(router)
         const handleKeydown = () => {
             if (!tags.value.includes(tag.value)) {
-                tag.value = tag.value.replace(/\s/, '') //removes whitspace
-                tags.value.push(tag.value)
+                if(tag.value){
+                    tag.value = tag.value.replace(/\s/, '') //removes whitspace
+                    tags.value.push(tag.value)
+                }
             }
             tag.value = ''
         }
+
         const addPost = async () => {
             const post = {
                 title: title.value,
                 body: body.value,
                 tags: tags.value,
-                dateTime: dateTim
+                //dateTime: post_date,
+                img: img.value
             }
-            await fetch('http://localhost:3000/posts', {
+            console.log('tagovi' + ' ' + tags.value)
+            await fetch('http://localhost:3000/create', {
                 method: 'POST',
                 headers: { 'Content-type': 'application/json'},
                 body: JSON.stringify(post)
             })
             router.push({ name: 'Home' })
         }
-        return { title, body, tag, tags, dateTime, handleKeydown, addPost }
+        return { title, body, tag, tags, dateTime, img, handleKeydown, addPost }
     }
 }
 </script>

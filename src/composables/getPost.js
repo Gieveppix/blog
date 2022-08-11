@@ -10,7 +10,8 @@ const getPost = (id) => {
             if (!data.ok) {
                 throw Error('that post does not exist')
             }
-            post.value = await data.json()
+            let postdata = await data.json()
+            post.value = postdata
         } catch(err) {
             error.value = err.message
             console.log(error.value)
