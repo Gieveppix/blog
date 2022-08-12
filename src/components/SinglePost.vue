@@ -20,9 +20,12 @@
     <div class="date">Posted: {{ post.post_date }}</div>
   </div>
 </template>
+
 <script>
+
 import { computed } from "vue";
-import useTags from "../composables/useTags";
+import useTags from "../composables/tagJs/useTags";
+
 export default {
   props: ["post", "posts"],
   setup(props) {
@@ -34,6 +37,7 @@ export default {
   },
 };
 </script>
+
 <style>
 .post {
   margin: 0px 0 30px;

@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import useTags from "../composables/useTags";
+import useTags from "../composables/tagJs/useTags";
 
 export default {
   props: ["posts"],

@@ -1,7 +1,7 @@
 <template>
   <div class="top">
     <div class="create">
-      <form @submit.prevent="addPost">
+      <form @submit.prevent="addpost">
         <label>Title:</label>
         <input v-model="title" type="text" required />
         <label>Content:</label>
@@ -12,17 +12,21 @@
         <input
           v-model="tag"
           type="text"
-          @keydown.enter.prevent="handleKeydown"
+          @keydown.enter.prevent="addtag"
         />
-        <div v-for="tag in tags" :key="tag" class="pill">#{{ tag }}</div>
-        <button>Add Post</button>
+        <div @click.prevent="removetag" v-for="tag in tags" :key="tag" class="pill pointer">#{{ tag }}</div>
+        <button class="pointer">Add Post</button>
       </form>
+      <div class="space"></div>
     </div>
   </div>
 </template>
 <script>
 import { ref } from "@vue/reactivity";
 import { useRouter } from "vue-router";
+import addTag from "../composables/tagJs/addTag.js"
+import removeTag from "../composables/tagJs/removeTag.js"
+import addPost from "../composables/postJs/addPost.js"
 export default {
   setup() {
     const title = ref("");
@@ -31,34 +35,13 @@ export default {
     const tags = ref([]);
     const img = ref("");
 
+    const addtag = addTag(tags, tag)
+    const removetag = removeTag(tags, tag)
+    
     const router = useRouter();
-    // console.log(router);
-    const handleKeydown = () => {
-      if (!tags.value.includes(tag.value)) {
-        if (tag.value) {
-          tag.value = tag.value.replace(/\s/, ""); //removes whitspace
-          tags.value.push(tag.value);
-        }
-      }
-      tag.value = "";
-    };
+    const addpost = addPost(router, title, body, tags, img)
 
-    const addPost = async () => {
-      const post = {
-        title: title.value,
-        body: body.value,
-        tags: tags.value,
-        img: img.value,
-      };
-      // console.log("tagovi" + " " + tags.value);
-      await fetch("http://localhost:3000/create", {
-        method: "POST",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify(post),
-      });
-      router.push({ name: "Home" });
-    };
-    return { title, body, tag, tags, img, handleKeydown, addPost };
+    return { title, body, tag, tags, img, addtag, removetag, addpost };
   },
 };
 </script>
@@ -118,5 +101,11 @@ button {
   background-color: #f1eefc;
   padding: 0.5625rem 0.5rem;
   margin-right: 1rem;
+}
+.pointer {
+  cursor: pointer;
+}
+.space{
+  margin: 32px
 }
 </style>

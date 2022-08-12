@@ -1,7 +1,7 @@
 import { ref } from "vue";
 
 const deletePost = (id, router) => {
-  async function handleDelete() {
+  const handleDelete = async () => {
     const post = ref(null);
     const error = ref(null);
     try {
@@ -19,7 +19,7 @@ const deletePost = (id, router) => {
       headers: { "Content-type": "application/json" },
     });
     router.push({ name: "Home" });
-  }
+  };
   return { handleDelete };
 };
 

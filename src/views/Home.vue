@@ -15,7 +15,7 @@
 
 <script>
 import PostList from "../components/PostList.vue";
-import getPosts from "../composables/getPosts";
+import getPosts from "../composables/postJs/getPosts";
 import Spinner from "@/components/Spinner.vue";
 import TagCloud from "@/components/TagCloud.vue";
 

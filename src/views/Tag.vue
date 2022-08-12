@@ -1,19 +1,22 @@
 <template>
-  <div class="home">
-    <h1 class="homeTitle">#{{ titleTag }}</h1>
-    <div v-if="error">{{ error }}</div>
-    <div v-if="posts.length">
-      <PostList :posts="matchingTag" />
-    </div>
-    <div v-else>
-      <Spinner />
+  <div class="top">
+    <div class="home">
+      <h1 class="homeTitle">#{{ titleTag }}</h1>
+      <div v-if="error">{{ error }}</div>
+      <div v-if="posts.length">
+        <PostList :posts="matchingtag" />
+      </div>
+      <div v-else>
+        <Spinner />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import PostList from "../components/PostList.vue";
-import getPosts from "../composables/getPosts";
+import getPosts from "../composables/postJs/getPosts";
+import matchingTag from "../composables/tagJs/matchingTag.js";
 import Spinner from "@/components/Spinner.vue";
 import { useRoute } from "vue-router";
 import { computed } from "vue";
@@ -24,19 +27,14 @@ export default {
 
   setup() {
     const route = useRoute();
-    const { posts, error, load } = getPosts();
-
-    load();
-
-    const matchingTag = computed(() => {
-      const calculatedMatchingTag = posts.value.filter((currPost) =>
-        currPost.tags.includes(route.params.tag)
-      );
-      return calculatedMatchingTag;
-    });
     const titleTag = route.params.tag;
 
-    return { matchingTag, titleTag, posts, error };
+    const { posts, error, load } = getPosts();
+    load();
+
+    const matchingtag = matchingTag(computed, route, posts);
+
+    return { matchingtag, titleTag, posts, error };
   },
 };
 </script>

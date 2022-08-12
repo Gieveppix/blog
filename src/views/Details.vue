@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import deletePost from "../composables/deletePost.js";
-import getPost from "../composables/getPost.js";
+import deletePost from "../composables/postJs/deletePost.js";
+import getPost from "../composables/postJs/getPost.js";
 import Spinner from "@/components/Spinner.vue";
 import { useRouter } from "vue-router";
 
@@ -26,7 +26,7 @@ export default {
     load();
 
     const router = useRouter();
-    const { handleDelete } = deletePost(props.id, router);
+    const handleDelete = deletePost(props.id, router);
 
     return { post, error, handleDelete };
   },
