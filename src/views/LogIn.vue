@@ -2,17 +2,17 @@
   <div class="top">
     <h1>
       <div class="create">
-        <form>
+        <form @submit.prevent="loginuser">
           <div>
-            <label for="mail">Email:</label>
-            <input type="mail" id="email" required />
+            <label>Email:</label>
+            <input v-model="email" type="mail" required />
           </div>
           <label for="password">Password:</label>
-          <input type="password" id="password" required />
+          <input v-model="password" type="password" required />
 
           <nav class="sign_buttons">
             <button class="login">Login</button>
-            <button>Register</button>
+            <!-- <button>Register</button> -->
           </nav>
         </form>
       </div>
@@ -21,8 +21,20 @@
 </template>
 
 <script>
+import { ref } from "@vue/reactivity";
+import { useRouter } from "vue-router";
+import logInUser from "../composables/login/logInUser.js";
+
 export default {
-  name: "LogIn",
+  setup() {
+    const password = ref("");
+    const email = ref("");
+
+    const router = useRouter();
+    const loginuser = logInUser(router, password, email);
+
+    return { password, email, loginuser };
+  },
 };
 </script>
 
