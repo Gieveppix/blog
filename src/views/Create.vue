@@ -4,29 +4,36 @@
       <form @submit.prevent="addpost">
         <label>Title:</label>
         <input v-model="title" type="text" required />
+
         <label>Content:</label>
         <textarea v-model="body" required></textarea>
+
         <label>Image link:</label>
         <input v-model="img" type="text" required />
+
         <label>Tags (press enter to add a tag)</label>
-        <input
-          v-model="tag"
-          type="text"
-          @keydown.enter.prevent="addtag"
-        />
-        <div @click.prevent="removetag" v-for="tag in tags" :key="tag" class="pill pointer">#{{ tag }}</div>
+        <input v-model="tag" type="text" @keydown.enter.prevent="addtag" />
+        <div
+          @click="removetag"
+          v-for="tag in tags"
+          :key="tag"
+          class="pill pointer"
+        >
+          #{{ tag }}
+        </div>
         <button class="pointer">Add Post</button>
       </form>
       <div class="space"></div>
     </div>
   </div>
 </template>
+
 <script>
 import { ref } from "@vue/reactivity";
 import { useRouter } from "vue-router";
-import addTag from "../composables/tagJs/addTag.js"
-import removeTag from "../composables/tagJs/removeTag.js"
-import addPost from "../composables/postJs/addPost.js"
+import addTag from "../composables/tagJs/addTag.js";
+import removeTag from "../composables/tagJs/removeTag.js";
+import addPost from "../composables/postJs/addPost.js";
 export default {
   setup() {
     const title = ref("");
@@ -35,16 +42,17 @@ export default {
     const tags = ref([]);
     const img = ref("");
 
-    const addtag = addTag(tags, tag)
-    const removetag = removeTag(tags, tag)
-    
+    const addtag = addTag(tags, tag);
+    const removetag = removeTag(tags, tag);
+
     const router = useRouter();
-    const addpost = addPost(router, title, body, tags, img)
+    const addpost = addPost(router, title, body, tags, img);
 
     return { title, body, tag, tags, img, addtag, removetag, addpost };
   },
 };
 </script>
+
 <style>
 form {
   max-width: 480px;
@@ -105,7 +113,7 @@ button {
 .pointer {
   cursor: pointer;
 }
-.space{
-  margin: 32px
+.space {
+  margin: 32px;
 }
 </style>

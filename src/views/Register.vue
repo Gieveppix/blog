@@ -2,20 +2,20 @@
   <div class="top">
     <h1>
       <div class="create">
-        <form>
+        <form @submit.prevent="registeruser">
           <div>
-            <label for="name">Username:</label>
-            <input type="name" required />
+            <label>Username:</label>
+            <input v-model="name" type="text" required />
           </div>
-          <label for="password">Password:</label>
-          <input type="password" id="password" required />
+          <label>Password:</label>
+          <input v-model="password" type="password" required />
 
           <div>
-            <label for="mail">Email:</label>
-            <input type="mail" id="email" required />
+            <label>Email:</label>
+            <input v-model="email" type="mail" required />
           </div>
           <nav class="sign_buttons">
-            <button class="register">Register</button>
+            <button class="register pointer">Register</button>
           </nav>
         </form>
       </div>
@@ -24,8 +24,21 @@
 </template>
 
 <script>
+import { ref } from "@vue/reactivity";
+import { useRouter } from "vue-router";
+import registerUser from "../composables/register/registerUser.js";
+
 export default {
-  name: "Register",
+  setup() {
+    const name = ref("");
+    const password = ref("");
+    const email = ref("");
+
+    const router = useRouter();
+    const registeruser = registerUser(router, name, password, email);
+
+    return { name, password, email, registeruser };
+  },
 };
 </script>
 

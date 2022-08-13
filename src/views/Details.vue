@@ -26,7 +26,7 @@ export default {
     load();
 
     const router = useRouter();
-    const handleDelete = deletePost(props.id, router);
+    const { handleDelete } = deletePost(props.id, router);
 
     return { post, error, handleDelete };
   },
