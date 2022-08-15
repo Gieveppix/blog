@@ -7,6 +7,8 @@
       <nav>
         <router-link :to="{ name: 'Home' }">Home</router-link>
         <router-link :to="{ name: 'Create' }">Create Post</router-link>
+        <router-link :to="{ name: 'LogIn' }">Log in</router-link>
+        <router-link :to="{ name: 'Register' }">Register</router-link>
       </nav>
     </header>
   </div>
