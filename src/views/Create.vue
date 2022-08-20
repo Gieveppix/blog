@@ -14,8 +14,8 @@
         <label>Tags (press enter to add a tag)</label>
         <input v-model="tag" type="text" @keydown.enter.prevent="addtag" />
         <div
-          @click="removetag"
-          v-for="tag in tags"
+          @click="removetag(index)"
+          v-for="(tag, index) in tags"
           :key="tag"
           class="pill pointer"
         >
@@ -31,9 +31,9 @@
 <script>
 import { ref } from "@vue/reactivity";
 import { useRouter } from "vue-router";
-import addTag from "../composables/tagJs/addTag.js";
-import removeTag from "../composables/tagJs/removeTag.js";
-import addPost from "../composables/postJs/addPost.js";
+import handleAddTag from "../composables/tagJs/handleAddTag.js";
+import handleRemoveTag from "../composables/tagJs/handleRemoveTag.js";
+import handleAddPost from "../composables/postJs/handleAddPost.js";
 export default {
   setup() {
     const title = ref("");
@@ -42,13 +42,16 @@ export default {
     const tags = ref([]);
     const img = ref("");
 
-    const addtag = addTag(tags, tag);
-    const removetag = removeTag(tags, tag);
+    const addtag = handleAddTag(tags, tag);
+
+    const removetag = (index) => {
+      handleRemoveTag(tags, index);
+    };
 
     const router = useRouter();
-    const addpost = addPost(router, title, body, tags, img);
+    const addpost = handleAddPost(router, title, body, tags, img);
 
-    return { title, body, tag, tags, img, addtag, removetag, addpost };
+    return { title, body, tag, tags, img, addpost, addtag, removetag };
   },
 };
 </script>

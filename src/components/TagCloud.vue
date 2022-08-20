@@ -10,12 +10,12 @@
 </template>
 
 <script>
-import useTags from "../composables/tagJs/useTags";
+import handleUseTags from "../composables/tagJs/handleUseTags";
 
 export default {
   props: ["posts"],
   setup(props) {
-    const { tags } = useTags(props.posts);
+    const { tags } = handleUseTags(props.posts);
 
     return { tags };
   },

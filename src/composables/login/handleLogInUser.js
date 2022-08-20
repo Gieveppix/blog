@@ -1,4 +1,4 @@
-const logInUser = (router, password, email) => {
+const handleLogInUser = (router, password, email) => {
   const loginuser = async () => {
     const post = {
       password: password.value,
@@ -14,4 +14,4 @@ const logInUser = (router, password, email) => {
   return loginuser;
 };
 
-export default logInUser;
+export default handleLogInUser;

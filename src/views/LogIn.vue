@@ -23,7 +23,7 @@
 <script>
 import { ref } from "@vue/reactivity";
 import { useRouter } from "vue-router";
-import logInUser from "../composables/login/logInUser.js";
+import handleLogInUser from "../composables/login/handleLogInUser.js";
 
 export default {
   setup() {
@@ -31,7 +31,7 @@ export default {
     const email = ref("");
 
     const router = useRouter();
-    const loginuser = logInUser(router, password, email);
+    const loginuser = handleLogInUser(router, password, email);
 
     return { password, email, loginuser };
   },

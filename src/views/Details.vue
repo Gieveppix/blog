@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import deletePost from "../composables/postJs/deletePost.js";
-import getPost from "../composables/postJs/getPost.js";
+import handleDeletePost from "../composables/postJs/handleDeletePost.js";
+import handleGetPost from "../composables/postJs/handleGetPost.js";
 import Spinner from "@/components/Spinner.vue";
 import { useRouter } from "vue-router";
 
@@ -22,13 +22,13 @@ export default {
   props: ["id"],
   components: { Spinner },
   setup(props) {
-    const { post, error, load } = getPost(props.id); //same as getPost(route.params.id)
+    const { post, error, load } = handleGetPost(props.id); //same as handleGetPost(route.params.id)
     load();
 
     const router = useRouter();
-    const { handleDelete } = deletePost(props.id, router);
+    const { deletePost } = handleDeletePost(props.id, router);
 
-    return { post, error, handleDelete };
+    return { post, error, deletePost };
   },
 };
 </script>

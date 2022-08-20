@@ -15,8 +15,8 @@
 
 <script>
 import PostList from "../components/PostList.vue";
-import getPosts from "../composables/postJs/getPosts";
-import matchingTag from "../composables/tagJs/matchingTag.js";
+import handleGetPosts from "../composables/postJs/handleGetPosts";
+import handleMatchingTag from "../composables/tagJs/handleMatchingTag.js";
 import Spinner from "@/components/Spinner.vue";
 import { useRoute } from "vue-router";
 import { computed } from "vue";
@@ -29,10 +29,10 @@ export default {
     const route = useRoute();
     const titleTag = route.params.tag;
 
-    const { posts, error, load } = getPosts();
+    const { posts, error, load } = handleGetPosts();
     load();
 
-    const matchingtag = matchingTag(computed, route, posts);
+    const matchingtag = handleMatchingTag(computed, route, posts);
 
     return { matchingtag, titleTag, posts, error };
   },

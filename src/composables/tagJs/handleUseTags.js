@@ -1,6 +1,6 @@
 import { ref } from "vue";
 
-const useTags = (posts) => {
+const handleUseTags = (posts) => {
   const tags = ref([]);
   const tagSet = new Set();
 
@@ -13,4 +13,4 @@ const useTags = (posts) => {
   return { tags };
 };
 
-export default useTags;
+export default handleUseTags;

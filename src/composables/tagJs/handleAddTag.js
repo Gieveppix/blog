@@ -1,4 +1,4 @@
-const addTag = (tags, tag) => {
+const handleAddTag = (tags, tag) => {
   const addtag = async () => {
     if (!tags.value.includes(tag.value)) {
       if (tag.value) {
@@ -11,4 +11,4 @@ const addTag = (tags, tag) => {
   return addtag;
 };
 
-export default addTag;
+export default handleAddTag;

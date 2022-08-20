@@ -1,4 +1,4 @@
-const matchingTag = (computed, route, posts) => {
+const handleMatchingTag = (computed, route, posts) => {
   const matchingtag = computed(() => {
     const calculatedMatchingTag = posts.value.filter((currPost) =>
       currPost.tags.includes(route.params.tag)
@@ -9,4 +9,4 @@ const matchingTag = (computed, route, posts) => {
   return matchingtag;
 };
 
-export default matchingTag;
+export default handleMatchingTag;

@@ -26,7 +26,7 @@
 <script>
 import { ref } from "@vue/reactivity";
 import { useRouter } from "vue-router";
-import registerUser from "../composables/register/registerUser.js";
+import handleRegisterUser from "../composables/register/handleRegisterUser.js";
 
 export default {
   setup() {
@@ -35,7 +35,7 @@ export default {
     const email = ref("");
 
     const router = useRouter();
-    const registeruser = registerUser(router, name, password, email);
+    const registeruser = handleRegisterUser(router, name, password, email);
 
     return { name, password, email, registeruser };
   },

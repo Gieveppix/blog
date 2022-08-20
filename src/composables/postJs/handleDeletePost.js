@@ -1,7 +1,7 @@
 import { ref } from "vue";
 
-const deletePost = (id, router) => {
-  const handleDelete = async () => {
+const handleDeletePost = (id, router) => {
+  const deletePost = async () => {
     const post = ref(null);
     const error = ref(null);
     try {
@@ -20,7 +20,7 @@ const deletePost = (id, router) => {
     });
     router.push({ name: "Home" });
   };
-  return { handleDelete };
+  return { deletePost };
 };
 
-export default deletePost;
+export default handleDeletePost;

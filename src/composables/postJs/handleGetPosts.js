@@ -1,6 +1,6 @@
 import { ref } from "vue";
 
-const getPosts = () => {
+const handleGetPosts = () => {
   const posts = ref([]);
   const error = ref(null);
 
@@ -18,4 +18,4 @@ const getPosts = () => {
   };
   return { posts, error, load };
 };
-export default getPosts;
+export default handleGetPosts;

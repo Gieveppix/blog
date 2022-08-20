@@ -15,7 +15,7 @@
 
 <script>
 import PostList from "../components/PostList.vue";
-import getPosts from "../composables/postJs/getPosts";
+import handleGetPosts from "../composables/postJs/handleGetPosts.js";
 import Spinner from "@/components/Spinner.vue";
 import TagCloud from "@/components/TagCloud.vue";
 
@@ -23,7 +23,7 @@ export default {
   name: "Home",
   components: { PostList, Spinner, TagCloud },
   setup() {
-    const { posts, error, load } = getPosts();
+    const { posts, error, load } = handleGetPosts();
 
     load();
     return { posts, error };

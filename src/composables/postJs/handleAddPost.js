@@ -1,4 +1,4 @@
-const addPost = (router, title, body, tags, img) => {
+const handleAddPost = (router, title, body, tags, img) => {
   const addpost = async () => {
     const post = {
       title: title.value,
@@ -16,4 +16,4 @@ const addPost = (router, title, body, tags, img) => {
   return addpost;
 };
 
-export default addPost;
+export default handleAddPost;

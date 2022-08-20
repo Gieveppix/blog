@@ -1,4 +1,4 @@
-const registerUser = (router, name, password, email) => {
+const handleRegisterUser = (router, name, password, email) => {
   const registeruser = async () => {
     const post = {
       name: name.value,
@@ -15,4 +15,4 @@ const registerUser = (router, name, password, email) => {
   return registeruser;
 };
 
-export default registerUser;
+export default handleRegisterUser;
