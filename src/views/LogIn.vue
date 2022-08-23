@@ -24,9 +24,10 @@
 import { ref } from "@vue/reactivity";
 import { useRouter } from "vue-router";
 import handleLogInUser from "../composables/login/handleLogInUser.js";
-
 export default {
   setup() {
+
+
     const password = ref("");
     const email = ref("");
 

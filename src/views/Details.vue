@@ -3,8 +3,9 @@
     <div v-if="error">{{ error }}</div>
     <div v-if="post" class="post">
       <h3>{{ post.title }}</h3>
+      <h3>{{post.users_id}}</h3>
       <p class="pre">{{ post.body }}</p>
-      <button class="delete" @click="handleDelete">DELETE POST</button>
+      <button class="delete" @click="deletePost" v-show="showDelete">DELETE POST</button>
     </div>
     <p v-else>
       <Spinner />
@@ -18,17 +19,42 @@ import handleGetPost from "../composables/postJs/handleGetPost.js";
 import Spinner from "@/components/Spinner.vue";
 import { useRouter } from "vue-router";
 
+import { useUserStore } from "@/stores/user.js";
+import { usePostsStore } from "@/stores/posts.js";
+import { computed } from "@vue/reactivity"
+
 export default {
   props: ["id"],
   components: { Spinner },
   setup(props) {
+    const userStore = useUserStore();
+    const postsStore = usePostsStore()
+    let id = props.id
+    console.log(id);
+
+    let user = computed(() => {
+      return userStore.user
+    })
+
+    //console.log(userStore.user.user_id)
+
     const { post, error, load } = handleGetPost(props.id); //same as handleGetPost(route.params.id)
     load();
+
+    console.log(post);
 
     const router = useRouter();
     const { deletePost } = handleDeletePost(props.id, router);
 
-    return { post, error, deletePost };
+    let showDelete;
+    if ((userStore.user.user_id) === (JSON.parse(JSON.stringify(postsStore.posts))[0].users_id)) {
+      showDelete = true
+    }
+
+    console.log("kadsksakdUSER", userStore.user.user_id)
+    console.log("kdasokdmaPOSTS", JSON.parse(JSON.stringify(postsStore.posts))[0].users_id)
+
+    return { post, error, deletePost, showDelete };
   },
 };
 </script>
@@ -51,5 +77,23 @@ export default {
 }
 button.delete {
   margin: auto;
+}
+
+@media screen and (max-width: 600px) {
+    .post {
+      max-width: 400px;
+    }
+}
+
+@media screen and (max-width: 976px) and (min-width: 600px) {
+  .post {
+    max-width: 600px;
+  }
+}
+
+@media screen and (max-width: 1250px) and (min-width: 976px) {
+  .post {
+    max-width: 900px;
+  }
 }
 </style>

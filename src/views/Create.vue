@@ -34,6 +34,9 @@ import { useRouter } from "vue-router";
 import handleAddTag from "../composables/tagJs/handleAddTag.js";
 import handleRemoveTag from "../composables/tagJs/handleRemoveTag.js";
 import handleAddPost from "../composables/postJs/handleAddPost.js";
+
+import { useUserStore } from "@/stores/user.js";
+
 export default {
   setup() {
     const title = ref("");
@@ -41,6 +44,9 @@ export default {
     const tag = ref("");
     const tags = ref([]);
     const img = ref("");
+    
+    const userStore = useUserStore();
+    let user = userStore.user.user_id
 
     const addtag = handleAddTag(tags, tag);
 
@@ -49,7 +55,7 @@ export default {
     };
 
     const router = useRouter();
-    const addpost = handleAddPost(router, title, body, tags, img);
+    const addpost = handleAddPost(router, title, body, tags, img, user);
 
     return { title, body, tag, tags, img, addpost, addtag, removetag };
   },

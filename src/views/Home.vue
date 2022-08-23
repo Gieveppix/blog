@@ -2,7 +2,7 @@
   <div class="top">
     <div class="home">
       <div v-if="error">{{ error }}</div>
-      <div v-if="posts.length">
+      <div  v-if="posts.length">
         <PostList :posts="posts" />
         <TagCloud :posts="posts" />
       </div>
@@ -19,13 +19,34 @@ import handleGetPosts from "../composables/postJs/handleGetPosts.js";
 import Spinner from "@/components/Spinner.vue";
 import TagCloud from "@/components/TagCloud.vue";
 
+import { usePostsStore } from "@/stores/posts.js";
+import { computed } from "@vue/reactivity"
+
 export default {
   name: "Home",
   components: { PostList, Spinner, TagCloud },
   setup() {
+    
     const { posts, error, load } = handleGetPosts();
+    let allPosts;
+    
+    const functioni = async () => {
+      const postss = await load()
+      return postss
+    }
+    
+    functioni().then(function(result){
+      const postsStore = usePostsStore()
+      // let posts = computed(() => {
+      // return postsStore.posts
+      // })
+      postsStore.posts = result
+      console.log("rezultat",result)
+      console.log("alllll2", allPosts)
+    })
+    console.log("alllll1", allPosts)
 
-    load();
+    
     return { posts, error };
   },
 };

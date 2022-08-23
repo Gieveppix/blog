@@ -3,6 +3,7 @@ import { ref } from "vue";
 const handleGetPosts = () => {
   const posts = ref([]);
   const error = ref(null);
+  let postss;
 
   const load = async () => {
     try {
@@ -11,11 +12,13 @@ const handleGetPosts = () => {
         throw Error("no data available");
       }
       posts.value = await data.json();
+      postss = JSON.parse(JSON.stringify(posts.value))
+      return postss;
     } catch (err) {
       error.value = err.message;
       console.log(error.value);
     }
   };
-  return { posts, error, load };
+  return { posts, error, load, postss };
 };
 export default handleGetPosts;
