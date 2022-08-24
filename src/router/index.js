@@ -6,6 +6,7 @@ import Tag from "../views/Tag.vue";
 import Register from "../views/Register.vue";
 import LogIn from "../views/LogIn.vue";
 import NotFound from "../views/NotFound.vue";
+import { useUserStore } from "@/stores/user.js";
 
 const routes = [
   {
@@ -23,6 +24,13 @@ const routes = [
     path: "/create",
     name: "Create",
     component: Create,
+    beforeEnter: (to, from) => {
+      const userStore = useUserStore();
+      if(!userStore.user) {
+        return { path: '/'}
+      }
+    },
+
   },
   {
     path: "/tags/:tag",
@@ -51,5 +59,14 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
+
+router.beforeEach(async (to, from) => {
+  
+
+    let user = computed(() => {
+      return userStore.user
+    })
+  
+})
 
 export default router;

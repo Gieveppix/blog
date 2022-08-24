@@ -5,6 +5,8 @@
       <h3>{{ post.title }}</h3>
       <p class="pre">{{ post.body }}</p>
       <button class="delete" @click="deletePost" v-show="showDelete">DELETE POST</button>
+      <h3 style="margin-bottom: 0px;">Comments</h3>
+      <CommentSection :comments="comments"/>
     </div>
     <p v-else>
       <Spinner />
@@ -21,12 +23,15 @@ import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/user.js";
 import { usePostsStore } from "@/stores/posts.js";
 
+import CommentSection from "@/components/CommentSection.vue"
+import handleGetComments from "@/composables/comments/handleGetComments.js"
+
 export default {
   props: ["id"],
-  components: { Spinner },
+  components: { Spinner, CommentSection },
   setup(props) {
     const userStore = useUserStore();
-    const postsStore = usePostsStore()
+    const postsStore = usePostsStore();
     let id = null;
     let showDelete = false;
     
@@ -36,7 +41,6 @@ export default {
         
         if(((props.id) == (JSON.parse(JSON.stringify(postsStore.posts))[index].id))){
           id = index
-          console.log("IDDDDDD", id)
         }
       }
       
@@ -51,7 +55,11 @@ export default {
     const router = useRouter();
     const { deletePost } = handleDeletePost(props.id, router);
 
-    return { post, error, deletePost, showDelete };
+
+    const { comments, error_comment, load_comments } = handleGetComments();
+    load_comments();
+
+    return { post, error, deletePost, showDelete, comments, error_comment};
   },
 };
 </script>
@@ -68,6 +76,22 @@ export default {
   color: rgb(67, 67, 67);
   line-height: 1.5em;
   margin-top: 40px;
+}
+.comment {
+  
+  line-height: 0em;
+  margin-top: 0px;
+}
+.comment div {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  height: 90px;
+}
+.comment h4 {
+  margin-top: 60px;
 }
 .pre {
   white-space: pre-wrap;

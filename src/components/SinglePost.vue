@@ -41,7 +41,7 @@ export default {
 <style>
 .post {
   margin: 0px 0 30px;
-  padding-bottom: 60px;
+  padding-bottom: 25px;
   border-bottom: 1px #e7e7e7;
 }
 .post h3 {

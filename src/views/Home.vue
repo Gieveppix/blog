@@ -20,7 +20,6 @@ import Spinner from "@/components/Spinner.vue";
 import TagCloud from "@/components/TagCloud.vue";
 
 import { usePostsStore } from "@/stores/posts.js";
-import { computed } from "@vue/reactivity"
 
 export default {
   name: "Home",
@@ -30,12 +29,12 @@ export default {
     const { posts, error, load } = handleGetPosts();
     let allPosts;
     
-    const functioni = async () => {
+    const getPosts = async () => {
       const postss = await load()
       return postss
     }
     
-    functioni().then(function(result){
+    getPosts().then(function(result){
       const postsStore = usePostsStore()
       postsStore.posts = result
     })
