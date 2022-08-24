@@ -12,7 +12,6 @@ const handleDeletePost = (id, router) => {
       post.value = await data.json();
     } catch (err) {
       error.value = err.message;
-      console.log(error.value);
     }
     await fetch("http://localhost:3000/post/" + id, {
       method: "DELETE",

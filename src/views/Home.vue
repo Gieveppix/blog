@@ -26,7 +26,7 @@ export default {
   name: "Home",
   components: { PostList, Spinner, TagCloud },
   setup() {
-    
+
     const { posts, error, load } = handleGetPosts();
     let allPosts;
     
@@ -37,14 +37,8 @@ export default {
     
     functioni().then(function(result){
       const postsStore = usePostsStore()
-      // let posts = computed(() => {
-      // return postsStore.posts
-      // })
       postsStore.posts = result
-      console.log("rezultat",result)
-      console.log("alllll2", allPosts)
     })
-    console.log("alllll1", allPosts)
 
     
     return { posts, error };

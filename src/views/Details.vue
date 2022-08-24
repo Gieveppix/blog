@@ -30,18 +30,13 @@ export default {
     const userStore = useUserStore();
     const postsStore = usePostsStore()
     let id = props.id
-    console.log(id);
 
     let user = computed(() => {
       return userStore.user
     })
 
-    //console.log(userStore.user.user_id)
-
     const { post, error, load } = handleGetPost(props.id); //same as handleGetPost(route.params.id)
     load();
-
-    console.log(post);
 
     const router = useRouter();
     const { deletePost } = handleDeletePost(props.id, router);
@@ -50,9 +45,6 @@ export default {
     if ((userStore.user.user_id) === (JSON.parse(JSON.stringify(postsStore.posts))[0].users_id)) {
       showDelete = true
     }
-
-    console.log("kadsksakdUSER", userStore.user.user_id)
-    console.log("kdasokdmaPOSTS", JSON.parse(JSON.stringify(postsStore.posts))[0].users_id)
 
     return { post, error, deletePost, showDelete };
   },

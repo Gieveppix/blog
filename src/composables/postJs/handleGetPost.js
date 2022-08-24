@@ -14,7 +14,6 @@ const handleGetPost = (id) => {
       post.value = postdata;
     } catch (err) {
       error.value = err.message;
-      console.log(error.value);
     }
   };
   return { post, error, load };
