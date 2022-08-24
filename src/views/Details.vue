@@ -3,7 +3,6 @@
     <div v-if="error">{{ error }}</div>
     <div v-if="post" class="post">
       <h3>{{ post.title }}</h3>
-      <h3>{{post.users_id}}</h3>
       <p class="pre">{{ post.body }}</p>
       <button class="delete" @click="deletePost" v-show="showDelete">DELETE POST</button>
     </div>
@@ -21,7 +20,6 @@ import { useRouter } from "vue-router";
 
 import { useUserStore } from "@/stores/user.js";
 import { usePostsStore } from "@/stores/posts.js";
-import { computed } from "@vue/reactivity"
 
 export default {
   props: ["id"],
@@ -29,22 +27,54 @@ export default {
   setup(props) {
     const userStore = useUserStore();
     const postsStore = usePostsStore()
-    let id = props.id
+    let realId = props.id
+    let id = null;
+    let showDelete = false;
 
-    let user = computed(() => {
-      return userStore.user
-    })
+    //console.log("IIIDDD", realId)
+    
 
+    // console.log("USSSSER", userStore.user.user_id)
+    // console.log("JSONUSSSER", JSON.parse(JSON.stringify(postsStore.posts)))
+    //console.log("PROPPPS ID", props.id)
+    
+    if((userStore.user.user_id) !== false) {
+
+      for(const [index, item] of (JSON.parse(JSON.stringify(postsStore.posts))).entries()) {
+        //console.log("ITTEEM", item.id, "     INNDEEEX",index)
+        
+        //console.log("JSONUSSSER", index, JSON.parse(JSON.stringify(postsStore.posts))[index].id)
+
+        // console.log("PROPPS", index, props.id)
+        // console.log("JSON PROPSS", index, JSON.parse(JSON.stringify(postsStore.posts))[index].id)
+        // console.log("VALUES",props.id, (JSON.parse(JSON.stringify(postsStore.posts))[index].id));
+        // console.log("COMPARISON1", ((props.id) == (JSON.parse(JSON.stringify(postsStore.posts))[index].id)));
+        // console.log("COMPARISON2", !((props.id) != (JSON.parse(JSON.stringify(postsStore.posts))[index].id)));
+        // console.log("----------------");
+
+        if(((props.id) == (JSON.parse(JSON.stringify(postsStore.posts))[index].id))){
+          id = index
+          console.log("IDDDDDD", id)
+        }
+      }
+      // console.log(JSON.parse(JSON.stringify(postsStore.posts))[id])
+      if ((userStore.user.user_id) === (JSON.parse(JSON.stringify(postsStore.posts))[id].users_id)) {
+      showDelete = true
+      }
+      console.log((userStore.user.user_id), (JSON.parse(JSON.stringify(postsStore.posts))[id].users_id));
+      console.log(showDelete)
+      
+    }
+    
     const { post, error, load } = handleGetPost(props.id); //same as handleGetPost(route.params.id)
     load();
 
     const router = useRouter();
     const { deletePost } = handleDeletePost(props.id, router);
-
-    let showDelete;
-    if ((userStore.user.user_id) === (JSON.parse(JSON.stringify(postsStore.posts))[0].users_id)) {
-      showDelete = true
-    }
+    
+    // console.log("USSSER_ID", userStore.user.user_id)
+    // console.log("IDDDD", id)
+    // console.log(showDelete)
 
     return { post, error, deletePost, showDelete };
   },
