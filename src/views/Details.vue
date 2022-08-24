@@ -27,54 +27,29 @@ export default {
   setup(props) {
     const userStore = useUserStore();
     const postsStore = usePostsStore()
-    let realId = props.id
     let id = null;
     let showDelete = false;
-
-    //console.log("IIIDDD", realId)
-    
-
-    // console.log("USSSSER", userStore.user.user_id)
-    // console.log("JSONUSSSER", JSON.parse(JSON.stringify(postsStore.posts)))
-    //console.log("PROPPPS ID", props.id)
     
     if((userStore.user.user_id) !== false) {
 
       for(const [index, item] of (JSON.parse(JSON.stringify(postsStore.posts))).entries()) {
-        //console.log("ITTEEM", item.id, "     INNDEEEX",index)
         
-        //console.log("JSONUSSSER", index, JSON.parse(JSON.stringify(postsStore.posts))[index].id)
-
-        // console.log("PROPPS", index, props.id)
-        // console.log("JSON PROPSS", index, JSON.parse(JSON.stringify(postsStore.posts))[index].id)
-        // console.log("VALUES",props.id, (JSON.parse(JSON.stringify(postsStore.posts))[index].id));
-        // console.log("COMPARISON1", ((props.id) == (JSON.parse(JSON.stringify(postsStore.posts))[index].id)));
-        // console.log("COMPARISON2", !((props.id) != (JSON.parse(JSON.stringify(postsStore.posts))[index].id)));
-        // console.log("----------------");
-
         if(((props.id) == (JSON.parse(JSON.stringify(postsStore.posts))[index].id))){
           id = index
           console.log("IDDDDDD", id)
         }
       }
-      // console.log(JSON.parse(JSON.stringify(postsStore.posts))[id])
-      if ((userStore.user.user_id) === (JSON.parse(JSON.stringify(postsStore.posts))[id].users_id)) {
-      showDelete = true
-      }
-      console.log((userStore.user.user_id), (JSON.parse(JSON.stringify(postsStore.posts))[id].users_id));
-      console.log(showDelete)
       
+      if ((userStore.user.user_id) === (JSON.parse(JSON.stringify(postsStore.posts))[id].users_id)) {
+        showDelete = true
+      }
     }
     
-    const { post, error, load } = handleGetPost(props.id); //same as handleGetPost(route.params.id)
+    const { post, error, load } = handleGetPost(props.id); 
     load();
 
     const router = useRouter();
     const { deletePost } = handleDeletePost(props.id, router);
-    
-    // console.log("USSSER_ID", userStore.user.user_id)
-    // console.log("IDDDD", id)
-    // console.log(showDelete)
 
     return { post, error, deletePost, showDelete };
   },
