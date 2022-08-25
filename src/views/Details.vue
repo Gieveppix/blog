@@ -4,9 +4,11 @@
     <div v-if="post" class="post">
       <h3>{{ post.title }}</h3>
       <p class="pre">{{ post.body }}</p>
-      <button class="delete" @click="deletePost" v-show="showDelete">DELETE POST</button>
-      <h3 style="margin-bottom: 0px;">Comments</h3>
-      <CommentSection :comments="comments"/>
+      <button class="delete" @click="deletePost" v-show="showDelete">
+        DELETE POST
+      </button>
+      <h3 style="margin-bottom: 0px">Comments</h3>
+      <CommentSection :comments="comments" :id="id" />
     </div>
     <p v-else>
       <Spinner />
@@ -23,8 +25,8 @@ import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/user.js";
 import { usePostsStore } from "@/stores/posts.js";
 
-import CommentSection from "@/components/CommentSection.vue"
-import handleGetComments from "@/composables/comments/handleGetComments.js"
+import CommentSection from "@/components/CommentSection.vue";
+import handleGetComment from "@/composables/comments/handleGetComment.js";
 
 export default {
   props: ["id"],
@@ -32,34 +34,40 @@ export default {
   setup(props) {
     const userStore = useUserStore();
     const postsStore = usePostsStore();
+
     let id = null;
     let showDelete = false;
-    
-    if((userStore.user.user_id) !== false) {
 
-      for(const [index, item] of (JSON.parse(JSON.stringify(postsStore.posts))).entries()) {
-        
-        if(((props.id) == (JSON.parse(JSON.stringify(postsStore.posts))[index].id))){
-          id = index
+    if (userStore.user.user_id !== false) {
+      for (const [index, item] of JSON.parse(
+        JSON.stringify(postsStore.posts)
+      ).entries()) {
+        if (
+          props.id == JSON.parse(JSON.stringify(postsStore.posts))[index].id
+        ) {
+          id = index;
         }
       }
-      
-      if ((userStore.user.user_id) === (JSON.parse(JSON.stringify(postsStore.posts))[id].users_id)) {
-        showDelete = true
+      if (
+        userStore.user.user_id ===
+        JSON.parse(JSON.stringify(postsStore.posts))[id].users_id
+      ) {
+        showDelete = true;
       }
     }
-    
-    const { post, error, load } = handleGetPost(props.id); 
+
+    const { post, error, load } = handleGetPost(props.id);
     load();
 
     const router = useRouter();
     const { deletePost } = handleDeletePost(props.id, router);
 
-
-    const { comments, error_comment, load_comments } = handleGetComments();
+    const { comments, error_comment, load_comments } = handleGetComment(
+      props.id
+    );
     load_comments();
 
-    return { post, error, deletePost, showDelete, comments, error_comment};
+    return { post, error, deletePost, showDelete, comments, error_comment };
   },
 };
 </script>
@@ -78,7 +86,6 @@ export default {
   margin-top: 40px;
 }
 .comment {
-  
   line-height: 0em;
   margin-top: 0px;
 }
@@ -101,9 +108,9 @@ button.delete {
 }
 
 @media screen and (max-width: 600px) {
-    .post {
-      max-width: 400px;
-    }
+  .post {
+    max-width: 400px;
+  }
 }
 
 @media screen and (max-width: 976px) and (min-width: 600px) {

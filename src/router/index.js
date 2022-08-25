@@ -26,11 +26,10 @@ const routes = [
     component: Create,
     beforeEnter: (to, from) => {
       const userStore = useUserStore();
-      if(!userStore.user) {
-        return { path: '/'}
+      if (!userStore.user) {
+        return { path: "/" };
       }
     },
-
   },
   {
     path: "/tags/:tag",
@@ -59,14 +58,5 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
-
-router.beforeEach(async (to, from) => {
-  
-
-    let user = computed(() => {
-      return userStore.user
-    })
-  
-})
 
 export default router;
