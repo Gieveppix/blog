@@ -1,6 +1,7 @@
 <template>
   <div class="post">
     <div>
+      <div class="date">{{ post.post_date }}</div>
       <router-link :to="{ name: 'Details', params: { id: post.id } }">
         <div class="img-hover-zoom">
           <img class="pic" :src="post.img" />
@@ -10,6 +11,12 @@
     </div>
 
     <p class="snipp">{{ snippet }}</p>
+    
+    TODO: Add router link to all author posts
+
+    <div style="color:red;" class="author" v-if="changeColor">{{currentAuthor}}</div>
+    <div style="color: #7057dc;" class="author" v-else>{{currentAuthor}}</div>
+    
     <div class="tag" v-for="tag in post.tags" :key="tag">
       <span>
         <router-link :to="{ name: 'Tag', params: { tag: tag } }">
@@ -17,14 +24,15 @@
         </router-link>
       </span>
     </div>
-    <div class="date">Posted: {{ post.post_date }}</div>
   </div>
 </template>
 
 <script>
 
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import handleUseTags from "../composables/tagJs/handleUseTags";
+import { useUserStore } from "@/stores/user";
+import { usePostsStore } from "@/stores/posts";
 
 export default {
   props: ["post", "posts"],
@@ -33,7 +41,28 @@ export default {
     const snippet = computed(() => {
       return props.post.body.substring(0, 315) + "...";
     });
-    return { snippet, tags };
+
+    const userStore = useUserStore();
+    const postsStore = usePostsStore();
+    let currentAuthor = null;
+    const changeColor = ref(false);
+
+    let i = null;
+    
+    for (i = 0; i < postsStore.posts.length; i++) {
+      if(props.post.id == postsStore.posts[i].id){
+        break;
+      }
+    }
+    if(postsStore.posts[i].users_id) {
+          currentAuthor = props.post.name;
+        }
+    if(props.post.users_id == userStore.user.user_id) {
+      changeColor.value = !changeColor.value;
+    }
+
+
+    return { snippet, tags, currentAuthor, changeColor };
   },
 };
 </script>
@@ -95,8 +124,12 @@ export default {
 }
 .date {
   float: right;
-  margin-right: 20rem;
-  margin-top: 0.5625rem;
-  font-weight: 500;
+  margin-top: 33px;
+  font-size: 16px;
+}
+.author {
+  float: right;
+  margin-top: 8px;
+  cursor: pointer;
 }
 </style>

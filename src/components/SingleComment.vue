@@ -3,15 +3,19 @@
     <div class="name_date">
       <h4>{{ comment.user_name }}</h4>
       <h5>{{ comment.created_at }}</h5>
-      <h5>{{ showDelComment + " deletebutton" }}</h5>
+      <img class="thrash" @click="deleteComment" v-show="showDelComment" width="21" src="@/components/assets/vectorpaintThrashColor.svg"/>
+      <!-- <img class="edit" v-show="showDelComment" width="23" src="@/components/assets/vectorpaintEditColor.svg"> -->
     </div>
-    <p>{{ comment.comment }}</p>
+    <div class="comment_buttons">
+      <p>{{ comment.comment }}</p>
+    </div>
   </div>
 </template>
 
 <script>
-import { useCommentsStore } from "@/stores/comments.js";
+import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/user";
+import handleDeleteComment from "@/composables/comments/handleDeleteComment"
 
 export default {
   props: ["comment"],
@@ -20,20 +24,16 @@ export default {
 
     let ids = null;
     const userStore = useUserStore();
-    const commentsStore = useCommentsStore();
     let showDelComment = false;
-
-    console.log(
-      "props commentUser ididiid ==================",
-      props.comment.user_id
-    );
-    console.log("user ididid", userStore.user.user_id);
 
     if (props.comment.user_id === userStore.user.user_id) {
       showDelComment = true;
     }
-    console.log("showDelCommet", showDelComment);
-    return { comment, showDelComment };
+
+    const router = useRouter();
+    const deleteComment = () => handleDeleteComment(props.comment.id, props.comment.post_id,  router);
+
+    return { comment, showDelComment, deleteComment };
   },
 };
 </script>
@@ -43,11 +43,36 @@ export default {
   display: flex;
   margin-top: 32px;
 }
+.name_date h4 {
+  color: #7057dc;
+}
 .name_date h5 {
   margin-top: 23.5px;
   margin-left: 3rem;
 }
-.comment p {
+
+.comment_buttons{
+  display: block;
+}
+
+.comment .comment_buttons p {
+  max-width: 512px;
   margin-top: 0px;
+  background: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  box-shadow: 1px 2px 3px rgba(0,0,0,0.05);
+  border-left: 5px solid #7057dc;
+}
+.thrash, .edit {
+  position: absolute;
+  padding-top: 20px;
+  padding-left: 512px;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+.edit {
+  padding-left: 475px;
 }
 </style>

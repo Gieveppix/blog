@@ -3,7 +3,7 @@
     <div class="create">
       <form @submit.prevent="addpost">
         <label>Title:</label>
-        <input v-model="title" type="text" required />
+        <input v-model="title" type="text" required autofocus/>
 
         <label>Content:</label>
         <textarea v-model="body" required></textarea>

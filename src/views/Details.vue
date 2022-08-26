@@ -3,12 +3,12 @@
     <div v-if="error">{{ error }}</div>
     <div v-if="post" class="post">
       <h3>{{ post.title }}</h3>
+      <img @click="deletePost" v-show="showDelete" class="thrash" width="21" src="@/components/assets/trash-can-regular.svg" />
       <p class="pre">{{ post.body }}</p>
-      <button class="delete" @click="deletePost" v-show="showDelete">
-        DELETE POST
-      </button>
-      <h3 style="margin-bottom: 0px">Comments</h3>
-      <CommentSection :comments="comments" :id="id" />
+      <h3 style="margin-bottom: 0px;">Comments</h3>
+      <div style="margin-top:32px;">
+        <CommentSection :comments="comments" :post_id="post_id" :user_id="user_id" />
+      </div>
     </div>
     <p v-else>
       <Spinner />
@@ -67,7 +67,10 @@ export default {
     );
     load_comments();
 
-    return { post, error, deletePost, showDelete, comments, error_comment };
+    let post_id = props.id
+    let user_id = userStore.user.user_id
+    
+    return { post, error, deletePost, showDelete, comments, error_comment, post_id, user_id };
   },
 };
 </script>
@@ -77,7 +80,8 @@ export default {
   margin-right: 10px;
 }
 .post {
-  max-width: 1200px;
+  font-size: 20px;
+  max-width: 800px;
   margin: 0 auto;
 }
 .post p {
@@ -105,6 +109,10 @@ export default {
 }
 button.delete {
   margin: auto;
+}
+.post .thrash {
+  padding-top: 33px;
+  padding-left: 250px;
 }
 
 @media screen and (max-width: 600px) {

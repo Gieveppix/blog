@@ -60,8 +60,9 @@ export default {
 }
 .home {
   color: rgb(67, 67, 67);
-  max-width: 1300px;
+  max-width: 1000px;
   margin: 0 auto;
+  font-size: 18px;
 }
 .homeTitle {
   padding: 20px;
