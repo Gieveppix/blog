@@ -4,6 +4,11 @@
       <div class="comment_item" v-for="comment in comments" :key="comment.id">
         <SingleComment :comment="comment" />
       </div>
+      <!-- TODO: nova komponenta koja prima prop comment-->
+      <!-- comment je computed property -->
+      <!-- Kada pritisnes edit, taj computed prop se seta na taj komentar -->
+      
+      
       <form @submit="addComment">
         <label v-if="comments.length === 0">Be The First To Comment!</label>
         <label v-else>New Comment:</label>

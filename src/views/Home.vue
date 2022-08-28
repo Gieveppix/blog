@@ -23,10 +23,15 @@ import { usePostsStore } from "@/stores/posts.js";
 import { useCommentsStore } from "@/stores/comments";
 import handleGetComments from "@/composables/comments/handleGetComments";
 
+import { useRouter } from "vue-router";
+
 export default {
   name: "Home",
   components: { PostList, Spinner, TagCloud },
   setup() {
+    
+    const router = useRouter();
+    try {
     const { posts, error, load } = handleGetPosts();
 
     const getPosts = async () => {
@@ -50,6 +55,10 @@ export default {
     });
 
     return { posts, error };
+    }
+    catch(err) {
+      router.go( {path: `/`});
+    }
   },
 };
 </script>

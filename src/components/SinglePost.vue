@@ -12,10 +12,8 @@
 
     <p class="snipp">{{ snippet }}</p>
     
-    TODO: Add router link to all author posts
-
-    <div style="color:red;" class="author" v-if="changeColor">{{currentAuthor}}</div>
-    <div style="color: #7057dc;" class="author" v-else>{{currentAuthor}}</div>
+    <!-- TODO: Add router link to all author posts -->
+    <div class="author">{{currentAuthor}}</div>
     
     <div class="tag" v-for="tag in post.tags" :key="tag">
       <span>
@@ -29,40 +27,45 @@
 
 <script>
 
-import { computed, ref } from "vue";
+import { computed, onBeforeMount, ref } from "vue";
 import handleUseTags from "../composables/tagJs/handleUseTags";
-import { useUserStore } from "@/stores/user";
 import { usePostsStore } from "@/stores/posts";
+
+import { useRouter } from "vue-router";
 
 export default {
   props: ["post", "posts"],
   setup(props) {
+    const router = useRouter();
+    try {
     const { tags } = handleUseTags(props.posts);
     const snippet = computed(() => {
       return props.post.body.substring(0, 315) + "...";
     });
 
-    const userStore = useUserStore();
     const postsStore = usePostsStore();
+    
+    console.log(postsStore);
+
     let currentAuthor = null;
-    const changeColor = ref(false);
 
     let i = null;
     
+
     for (i = 0; i < postsStore.posts.length; i++) {
       if(props.post.id == postsStore.posts[i].id){
         break;
       }
     }
     if(postsStore.posts[i].users_id) {
-          currentAuthor = props.post.name;
+          currentAuthor = props.post.user_name;
         }
-    if(props.post.users_id == userStore.user.user_id) {
-      changeColor.value = !changeColor.value;
+
+    return { snippet, tags, currentAuthor };
     }
-
-
-    return { snippet, tags, currentAuthor, changeColor };
+    catch(err) {
+      router.go( {path: `/`});
+    }
   },
 };
 </script>
@@ -131,5 +134,6 @@ export default {
   float: right;
   margin-top: 8px;
   cursor: pointer;
+  color: #7057dc;
 }
 </style>
