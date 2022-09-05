@@ -42,17 +42,15 @@ export default {
 .name_date {
   display: flex;
   margin-top: 32px;
+  max-width: 557px;
 }
 .name_date h4 {
   color: #7057dc;
 }
 .name_date h5 {
-  margin-top: 23.5px;
+  margin-top: 30.5px;
   margin-left: 3rem;
-}
-
-.comment_buttons{
-  display: block;
+  margin-bottom: 0px;
 }
 
 .comment .comment_buttons p {
@@ -65,14 +63,15 @@ export default {
   border-left: 5px solid #7057dc;
 }
 .thrash, .edit {
-  position: absolute;
-  padding-top: 20px;
-  padding-left: 512px;
+  max-height: 24px;
+  padding-top: 29px;
   cursor: pointer;
   background: none;
   border: none;
+  position: absolute;
+  margin-left: 534px;
 }
 .edit {
-  padding-left: 475px;
+  padding-left: 510px;
 }
 </style>

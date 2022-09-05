@@ -3,6 +3,7 @@ import Home from "../views/Home.vue";
 import Details from "../views/Details.vue";
 import Create from "../views/Create.vue";
 import Tag from "../views/Tag.vue";
+import Author from "../views/Author.vue";
 import Register from "../views/Register.vue";
 import LogIn from "../views/LogIn.vue";
 import NotFound from "../views/NotFound.vue";
@@ -35,6 +36,11 @@ const routes = [
     path: "/tags/:tag",
     name: "Tag",
     component: Tag,
+  },
+  {
+    path: "/authors/:author",
+    name: "Author",
+    component: Author,
   },
   {
     path: "/register",

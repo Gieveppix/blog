@@ -111,8 +111,10 @@ button.delete {
   margin: auto;
 }
 .post .thrash {
+  position: relative;
   padding-top: 33px;
-  padding-left: 250px;
+  padding-left: 0px;
+  float: right;
 }
 
 @media screen and (max-width: 600px) {

@@ -13,7 +13,9 @@
     <p class="snipp">{{ snippet }}</p>
     
     <!-- TODO: Add router link to all author posts -->
-    <div class="author">{{currentAuthor}}</div>
+    <router-link :to="{ name: 'Author', params: { author: currentAuthor } }">
+      <div class="author">{{currentAuthor}}</div>
+    </router-link>
     
     <div class="tag" v-for="tag in post.tags" :key="tag">
       <span>
@@ -44,22 +46,19 @@ export default {
     });
 
     const postsStore = usePostsStore();
-    
-    console.log(postsStore);
 
     let currentAuthor = null;
 
     let i = null;
     
-
     for (i = 0; i < postsStore.posts.length; i++) {
       if(props.post.id == postsStore.posts[i].id){
         break;
       }
     }
     if(postsStore.posts[i].users_id) {
-          currentAuthor = props.post.user_name;
-        }
+      currentAuthor = props.post.user_name;
+    }
 
     return { snippet, tags, currentAuthor };
     }
